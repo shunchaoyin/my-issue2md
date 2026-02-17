@@ -3,3 +3,6 @@
 .idea/
 *.DS_Store
 /MY-ISSUE2MD # 忽略构建产物（假设与目录同名）
+__pycache__/ # Python 编译缓存
+*.pyc # Python 字节码文件
+*.pyo # Python 优化文件
