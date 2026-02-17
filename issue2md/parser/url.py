@@ -65,10 +65,7 @@ def parse_github_url(url: str) -> ParsedURL:
         ParsedURL(resource_type=ResourceType.ISSUE, owner='owner', repo='repo', number=123, ...)
     """
     # Parse the URL
-    try:
-        parsed = urlparse(url)
-    except Exception as e:
-        raise InvalidURLError(f"Invalid URL: {e}") from e
+    parsed = urlparse(url)
 
     # Validate domain
     if parsed.netloc != "github.com":
@@ -79,12 +76,21 @@ def parse_github_url(url: str) -> ParsedURL:
     # Parse path: /{owner}/{repo}/{type}/{number}
     parts = parsed.path.strip("/").split("/")
 
-    if len(parts) < 4:
+    if len(parts) != 4:
         raise InvalidURLError(
             f"Invalid URL path: expected /owner/repo/type/number, got /{parsed.path}"
         )
 
-    owner, repo, resource_type_str, number_str = parts[0], parts[1], parts[2], parts[3]
+    owner = parts[0]
+    repo = parts[1]
+    resource_type_str = parts[2]
+    number_str = parts[3]
+
+    # Validate owner and repo are not empty
+    if not owner or not repo:
+        raise InvalidURLError(
+            f"Invalid URL: owner and repo cannot be empty, got owner='{owner}', repo='{repo}'"
+        )
 
     # Validate number is an integer
     try:
