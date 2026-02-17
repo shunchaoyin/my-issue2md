@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "defaultMode": "plan",
+    "allow": [
+      "Read(*.py)",
+      "Read(requirements.txt)",
+      "Read(README.md)",
+      "Read(constitution.md)",
+      "Read(specs/**)",
+      "Grep",
+      "Glob",
+      "LS",
+      "Bash(python:version)",
+      "Bash(python:list:*)",
+      "Bash(python:build:*)",
+      "Bash(python:test:*)",
+      "Bash(black:*)",
+      "Bash(isort:*)",
+      "Bash(pylint:*)"
+    ],
+    "ask": [
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "Bash(pip:install:*)",
+      "Bash(pip:freeze:*)",
+      "Bash(git:add:*)",
+      "Bash(git:commit:*)"
+    ],
+    "deny": [
+      "Read(./.env*)",
+      "Read(*.pem)",
+      "Read(*.key)",
+      "Bash(rm:*)",
+      "Bash(git:push:*)",
+      "WebFetch"
+    ]
+  }
+}
+
